@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IST International Winter Webinar Series (Online) | The University of Osaka</title>
+  <meta name="description" content="International online webinar series by Osaka University IST. Evening sessions (21:00–23:00 JST) during the week of March 9." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ou-blue: #0a4da2;
+      --ist-teal: #00a3a3;
+      --ink: #0f172a;
+      --muted: #94a3b8;
+      --bg: #0b1220;
+      --card: #101826;
+      --ring: rgba(255,255,255,.15);
+      --grad-1: #0b1220;
+      --grad-2: #0f274e;
+      --grad-3: #162d68;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(135deg,var(--grad-1),var(--grad-2) 35%,var(--grad-3));color:#e5e7eb;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+    a{color:#c7e1ff;text-decoration:none}
+    img{max-width:100%;display:block;border-radius:12px}
+    .container{width:min(1200px,92vw);margin-inline:auto}
+    header{position:sticky;top:0;z-index:40;background:rgba(11,18,32,.8);backdrop-filter: blur(12px);border-bottom:1px solid var(--ring)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:14px;align-items:center}
+    .brand img{height:50px;width:auto;}
+    .brand h1{font-family:"Playfair Display",serif;font-size:18px;line-height:1.1;margin:0;color:#ffffff}
+    .brand p{margin:0;font-size:12px;color:#cbd5e1}
+    .nav a.btn{padding:10px 16px;border:1px solid var(--ring);border-radius:12px}
+    .btn-primary{background:linear-gradient(180deg,#3ba1ff,#1f78ff);color:#fff;border:none}
+    .btn-ghost{color:#e5e7eb}
+
+    /* HERO with banner */
+    .hero{position:relative;overflow:hidden;text-align:center;padding:90px 0;background:linear-gradient(135deg,rgba(11,18,32,.9),rgba(15,39,78,.85))}
+    .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,10,18,.78),rgba(5,10,18,.78));}
+    .hero > .container{position:relative;z-index:1}
+    .title{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(28px,4vw,48px);line-height:1.2;margin:12px 0}
+    .subtitle{color:#cbd5e1;font-size:18px;max-width:76ch;margin:auto;line-height:1.6}
+    .cta{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+    .meta{display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap}
+    .meta div{background:rgba(255,255,255,.05);padding:12px 20px;border-radius:12px;border:1px solid var(--ring)}
+    .meta h4{margin:0;color:#fff;font-size:14px}
+    .meta p{margin:6px 0 0;color:#cbd5e1;font-size:13px}
+
+    /* SPEAKERS */
+    .speakers{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:24px}
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+    .card .photo{aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+    .card .photo img{width:100%;height:100%;object-fit:cover}
+    .card .content{padding:16px}
+    .tag{display:inline-block;font-size:12px;padding:6px 10px;border:1px solid var(--ring);border-radius:999px;color:#9fd5ff}
+    .talk{font-weight:700;margin:10px 0 6px;color:#fff;cursor:pointer}
+    .speaker{margin:0 0 8px;color:#cbd5e1;cursor:pointer}
+
+    /* SCHEDULE */
+    .schedule{margin-top:40px}
+    .day{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:20px;margin-bottom:20px}
+    .day h4{margin-top:0;color:#fff}
+    .slot{display:grid;grid-template-columns:140px 1fr;gap:16px;margin-bottom:14px}
+    .slot .time{color:#a5b4fc;font-weight:600}
+    .slot h5{margin:0;color:#fff}
+    .slot p{margin:4px 0 0;color:#cbd5e1;font-size:14px}
+
+    /* MODAL */
+    dialog{border:none;border-radius:16px;padding:0;background:#0f172a;color:#e5e7eb;max-width:860px;width:96vw;box-shadow:0 20px 80px rgba(0,0,0,.45)}
+    dialog::backdrop{background:rgba(6,11,19,.72)}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px;border-bottom:1px solid var(--ring)}
+    .modal-body{padding:18px}
+    .modal-body h4{margin:0 0 8px}
+    .modal-grid{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start}
+    .speaker-photo{border-radius:12px;overflow:hidden}
+    .learn{margin-top:14px;padding-left:18px}
+    .x{all:unset;cursor:pointer;line-height:0;font-size:22px}
+
+    footer{border-top:1px solid var(--ring);padding:30px 0 40px;color:#cbd5e1;text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img src="assets/osaka-university-logo.png" alt="Osaka University Logo" />
+        <img src="assets/ist-logo.png" alt="Graduate School of IST Logo" />
+        <div>
+          <h1>Winter School · Trustworthy & Generative AI for Society 5.0 (Online)</h1>
+          <p>Graduate School of Information Science and Technology — Osaka University</p>
+        </div>
+      </div>
+      <nav style="display:flex;gap:10px">
+        <a class="btn btn-ghost" href="#speakers">Speakers</a>
+        <a class="btn btn-ghost" href="#schedule">Schedule</a>
+        <a class="btn btn-ghost" href="#register">Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h2 class="title">Advancing Human‑Centered, Trustworthy, and Generative AI to Build a Resilient Society 5.0</h2>
+        <p class="subtitle">Evening online sessions (English) with interactive Q&amp;A. <strong>Typical session length: 1.5–2 hours (including Q&amp;A), starting at 21:00 JST</strong>. Zoom link is emailed after registration.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#register">Reserve Your Seat</a>
+        </div>
+        <div class="meta">
+          <div><h4>Dates</h4><p>Week of March 9 · Online</p></div>
+          <div><h4>Host</h4><p>Graduate School of IST, Osaka University</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="speakers" class="container">
+      <h3 class="section-title">Speakers</h3>
+      <div class="speakers">
+
+        <!-- 1. Shunsuke Saruwatari -->
+        <article class="card">
+          <div class="photo" data-open="talk-1"><img src="assets/speakers/saru.png" alt="Assoc. Prof. Shunsuke Saruwatari" onerror="this.onerror=null;this.src=fallbackAvatar('SS');"></div>
+          <div class="content">
+            <span class="tag">Talk 1 · Week of Mar 9 · 21:00 JST</span>
+            <h4 class="talk" data-open="talk-1">Millimeter-level Wireless Localization Using UWB Wireless Networks</h4>
+            <p class="speaker" data-open="talk-1">Assoc. Prof. Shunsuke Saruwatari · The University of Osaka</p>
+          </div>
+        </article>
+
+        <!-- 2. Yoshihiro Toya -->
+        <article class="card">
+          <div class="photo" data-open="talk-2"><img src="assets/speakers/toya.png" alt="Assoc. Prof. Yoshihiro Toya" onerror="this.onerror=null;this.src=fallbackAvatar('YT');"></div>
+          <div class="content">
+            <span class="tag">Talk 2 · Week of Mar 9 · 21:00 JST</span>
+            <h4 class="talk" data-open="talk-2">Engineering of Metabolic Pathways and Controlling the Flux for Efficient Bio‑Production</h4>
+            <p class="speaker" data-open="talk-2">Assoc. Prof. Yoshihiro Toya · The University of Osaka</p>
+          </div>
+        </article>
+
+        <!-- 3. Jun Shiomi -->
+        <article class="card">
+          <div class="photo" data-open="talk-3"><img src="assets/speakers/shiomi.png" alt="Assoc. Prof. Jun Shiomi" onerror="this.onerror=null;this.src=fallbackAvatar('JS');"></div>
+          <div class="content">
+            <span class="tag">Talk 3 · Week of Mar 9 · 21:00 JST</span>
+            <h4 class="talk" data-open="talk-3">Towards a Safe and Secure Society: Detection of Hardware Trojans in Integrated Circuits</h4>
+            <p class="speaker" data-open="talk-3">Assoc. Prof. Jun Shiomi · The University of Osaka</p>
+          </div>
+        </article>
+
+        <!-- 4. Taisuke Izumi -->
+        <article class="card">
+          <div class="photo" data-open="talk-4"><img src="assets/speakers/izumi.png" alt="Prof. Taisuke Izumi" onerror="this.onerror=null;this.src=fallbackAvatar('TI');"></div>
+          <div class="content">
+            <span class="tag">Talk 4 · Week of Mar 9 · 21:00 JST</span>
+            <h4 class="talk" data-open="talk-4">Distributed Algorithm Beyond Worst Case</h4>
+            <p class="speaker" data-open="talk-4">Prof. Taisuke Izumi · The University of Osaka</p>
+          </div>
+        </article>
+
+        <!-- 5. Yuya Sasaki -->
+        <article class="card">
+          <div class="photo" data-open="talk-5"><img src="assets/speakers/sasaki.jpg" alt="Assoc. Prof. Yuya Sasaki" onerror="this.onerror=null;this.src=fallbackAvatar('YS');"></div>
+          <div class="content">
+            <span class="tag">Talk 5 · Week of Mar 9 · 21:00 JST</span>
+            <h4 class="talk" data-open="talk-5">Graph Data Analysis: From Efficiency and Accuracy to Trustworthy</h4>
+            <p class="speaker" data-open="talk-5">Assoc. Prof. Yuya Sasaki · The University of Osaka</p>
+          </div>
+        </article>
+</div>
+    </section>
+
+    <section id="schedule" class="container schedule">
+      <h3 class="section-title">Schedule</h3>
+      <p class="section-sub">A focused set of evening talks during the week of March 9 · <strong>21:00 – 23:00 JST (typ.)</strong>. All sessions are online via Zoom. Links are emailed automatically after Google Form registration.</p>
+
+
+      <div class="day"><h4>Week of March 9 (JST)</h4>
+        <div class="slot"><div class="time">21:00 – 23:00</div><div><h5>Talk 1</h5><p>Assoc. Prof. Shunsuke Saruwatari · The University of Osaka</p></div></div>
+        <div class="slot"><div class="time">21:00 – 23:00</div><div><h5>Talk 2</h5><p>Assoc. Prof. Yoshihiro Toya · The University of Osaka</p></div></div>
+        <div class="slot"><div class="time">21:00 – 23:00</div><div><h5>Talk 3</h5><p>Assoc. Prof. Jun Shiomi · The University of Osaka</p></div></div>
+        <div class="slot"><div class="time">21:00 – 23:00</div><div><h5>Talk 4</h5><p>Prof. Taisuke Izumi · The University of Osaka</p></div></div>
+        <div class="slot"><div class="time">21:00 – 23:00</div><div><h5>Talk 5</h5><p>Assoc. Prof. Yuya Sasaki · The University of Osaka</p></div></div>
+      </div>
+</section>
+
+    <section id="register" class="container">
+      <h3 class="section-title">Register</h3>
+      <p class="section-sub">Participation is free but registration is required. Upon registration, attendees will receive the Zoom link by email. Please use the Google Form below to register and save your info.</p>
+      <p><a class="btn btn-primary" href="https://forms.gle/your-google-form-link" target="_blank">Open Registration Form</a></p>
+    </section>
+  </main>
+
+
+  <!-- TALK MODALS -->
+  <dialog id="talk-1">
+    <div class="modal-head"><strong>Assoc. Prof. Shunsuke Saruwatari</strong><button class="x" data-close>&times;</button></div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="speaker-photo"><img src="assets/speakers/saru.png" alt="Shunsuke Saruwatari" onerror="this.onerror=null;this.src=fallbackAvatar('SS');"></div>
+        <div>
+          <h4>Millimeter-level Wireless Localization Using UWB Wireless Networks</h4>
+          <p><em>Time:</em> Week of Mar 9 (TBD), 21:00–23:00 JST</p>
+          <p><em>Abstract:</em> Ultra-Wideband (UWB) wireless technology, best known today for powering precise location tracking in consumer devices such as Apple's AirTag, enables radio signals to measure distances with centimeter-level precision. While current UWB systems require multiple anchors installed around a room, this setup is often impractical for everyday environments such as offices, homes, or factories. In this talk, I will introduce our research on millimeter-level localization using a single compact UWB module. Our system, developed as part of the XRLoc project, can track the position of multiple objects in real time from a single point, without the need for multiple anchors. We demonstrate how this technology can turn ordinary objects, such as cups or tools, into trackable interactive elements in extended-reality (XR) and robotics applications. By reducing infrastructure cost and setup complexity, this approach brings high-precision localization from specialized labs into everyday environments, bridging the gap between consumer devices like AirTags and industrial-grade positioning systems.</p>
+          <p><em>Bio:</em> 2007 Ph.D. (Science), The University of Tokyo. 2008–2011 Assistant Professor, RCAST, The University of Tokyo, Japan. 2012–2015 Lecturer, Graduate School of Information Science, Shizuoka University, Japan. 2016–Present Associate Professor, Graduate School of Information Science and Technology, The University of Osaka, Japan. 2023–Present Visiting Scholar, ECE, the University of California, San Diego, USA. Specialization: Wireless Networks, Sensor Networks, IoT, System Software.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="talk-2">
+    <div class="modal-head"><strong>Assoc. Prof. Yoshihiro Toya</strong><button class="x" data-close>&times;</button></div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="speaker-photo"><img src="assets/speakers/toya.png" alt="Yoshihiro Toya" onerror="this.onerror=null;this.src=fallbackAvatar('YT');"></div>
+        <div>
+          <h4>Engineering of Metabolic Pathways and Controlling the Flux for Efficient Bio‑Production</h4>
+          <p><em>Time:</em> Week of Mar 9 (TBD), 21:00–23:00 JST</p>
+          <p><em>Abstract:</em> To achieve a sustainable society, many efforts are being made to replace chemical processes that depend on fossil resources with microbial fermentation processes that utilize renewable biomass resources. Microorganisms have great potential to convert sugars to various useful compounds, such as alcohols, organic acids, and polymer materials, via multi-step enzymatic reactions, known as metabolic pathways. Because the role of native metabolism is not to produce our target compounds, its innate productivity is generally not so high. Therefore, modifying the metabolic system to enhance the productivity of the target compound is necessary. Many technologies have been developed to optimize metabolic pathways. In this lecture, I will present methodologies for the computational design of metabolic pathways using a stoichiometric model and for the experimental evaluation of metabolic flow in these pathways. In addition, methods for controlling metabolic flow on pathways to approach an ideal state will be introduced.</p>
+          <p><em>Bio:</em> Yoshihiro Toya is an Associate Professor at The University of Osaka.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="talk-3">
+    <div class="modal-head"><strong>Assoc. Prof. Jun Shiomi</strong><button class="x" data-close>&times;</button></div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="speaker-photo"><img src="assets/speakers/shiomi.png" alt="Jun Shiomi" onerror="this.onerror=null;this.src=fallbackAvatar('JS');"></div>
+        <div>
+          <h4>Towards a Safe and Secure Society: Detection of Hardware Trojans in Integrated Circuits</h4>
+          <p><em>Time:</em> Week of Mar 9 (TBD), 21:00–23:00 JST</p>
+          <p><em>Abstract:</em> Our modern lives are entirely dependent on Integrated Circuits (ICs) found in everything from smartphones and cars to critical medical equipment. While these chips are the heart of modern society, they face a severe, invisible threat, particularly because they are manufactured across a global supply chain involving multiple companies. This threat is called the Hardware Trojan, a malicious circuit secretly inserted during the chip design or manufacturing process. It poses an existential risk, capable of causing devastating data leaks or catastrophic system failure, fundamentally undermining our privacy and the safety of critical social infrastructure. This talk will firstly provide a simple overview of how ICs are designed and how Hardware Trojans are injected. It will then introduce cutting-edge techniques to detect Hardware Trojans and novel Hardware Trojans for emerging applications. The goal of this talk is to provide the audience with a better understanding of security regarding their daily technology and highlight the efforts required to build a trustworthy information society.</p>
+          <p><em>Bio:</em> Jun Shiomi is an Associate Professor at The University of Osaka.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="talk-4">
+    <div class="modal-head"><strong>Prof. Taisuke Izumi</strong><button class="x" data-close>&times;</button></div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="speaker-photo"><img src="assets/speakers/izumi.png" alt="Taisuke Izumi" onerror="this.onerror=null;this.src=fallbackAvatar('TI');"></div>
+        <div>
+          <h4>Distributed Algorithm Beyond Worst Case</h4>
+          <p><em>Time:</em> Week of Mar 9 (TBD), 21:00–23:00 JST</p>
+          <p><em>Abstract:</em> The worst-case analysis, which evaluates the performance of algorithms with the most difficult inputs, is standard in theoretical computer science. However, real-world inputs are not always adversarial as assumed in worst-case analysis, and often have better properties arising from their application domain. This can cause a gap between the theoretical guarantees of algorithms and their practical performance. The Beyond-Worst-Case paradigm is a general term for algorithm design that aims to close this gap. By mathematically characterizing typical properties of real data and designing algorithms that exploit these properties, this paradigm explores theoretically rigorous algorithm design with practical efficiency. In recent years, the Beyond-Worst-Case paradigm has become an important research field in theoretical computer science, and has led to many new techniques and problem formulations. In this seminar, we present recent progress in Beyond-Worst-Case approaches in the field of distributed graph algorithms that studies the methodology of in-network solving of graph problems taking network topologies as inputs. Although the topics are highly theoretical and mathematical, no knowledge beyond undergraduate-level graph theory and algorithm theory is required.</p>
+          <p><em>Bio:</em> 2006 Ph.D. (Computer science), Osaka University. 2006–2009 Assistant Professor, Nagoya Institute of Technology, Japan. 2009–2020 Associate Professor, Nagoya Institute of Technology, Japan. 2020–2025 Associate Professor, Osaka University, Japan. 2025–Present Professor, The University of Osaka, Japan. Speciality: Algorithm design and complexity analysis, distributed systems.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="talk-5">
+    <div class="modal-head"><strong>Assoc. Prof. Yuya Sasaki</strong><button class="x" data-close>&times;</button></div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="speaker-photo"><img src="assets/speakers/sasaki.jpg" alt="Yuya Sasaki" onerror="this.onerror=null;this.src=fallbackAvatar('YS');"></div>
+        <div>
+          <h4>Graph Data Analysis: From Efficiency and Accuracy to Trustworthy</h4>
+          <p><em>Time:</em> Week of Mar 9 (TBD), 21:00–23:00 JST</p>
+          <p><em>Abstract:</em> Graph data are widely ubiquitous, ranging from social networks to molecules. Graph data analysis aims to efficiently and accurately analyze such data and to uncover new knowledge. The goal of this talk is to introduce core graph data analysis techniques: graph search, graph mining, and graph neural networks. Then, I will discuss how graph analytics can evolve beyond efficiency and accuracy toward trustworthy outcomes.</p>
+          <p><em>Bio:</em> Yuya Sasaki is an Associate Professor at The University of Osaka.</p>
+          <p><a href="http://www-bigdata.ist.osaka-u.ac.jp/sasaki" target="_blank" rel="noopener">Lab page</a></p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+
+  <footer>
+    <p style="text-align:center">&copy; <span id="year"></span> Graduate School of Information Science and Technology, Osaka University. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fallback avatar (in case a local headshot file is missing)
+    function fallbackAvatar(initials){
+      const svg = `<?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#1f2937"/>
+              <stop offset="1" stop-color="#111827"/>
+            </linearGradient>
+          </defs>
+          <rect width="800" height="600" rx="24" fill="url(#g)"/>
+          <text x="50%" y="52%" text-anchor="middle" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="120" fill="#e5e7eb" font-weight="700">${initials}</text>
+        </svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+
+    // Open/close modals by data-open and [data-close]
+    function wireOpeners(){
+      document.querySelectorAll('[data-open]').forEach(el=>{
+        el.addEventListener('click',()=>{
+          const id = el.getAttribute('data-open');
+          const dlg = document.getElementById(id);
+          if(dlg) dlg.showModal();
+        });
+      });
+    }
+    wireOpeners();
+    document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>btn.closest('dialog').close()));
+
+    // Close dialog when clicking backdrop
+    document.querySelectorAll('dialog').forEach(dlg=>{
+      dlg.addEventListener('click',e=>{
+        const r=dlg.getBoundingClientRect();
+        const inside=r.top<=e.clientY&&e.clientY<=r.top+r.height&&r.left<=e.clientX&&e.clientX<=r.left+r.width;
+        if(!inside) dlg.close();
+      });
+    });
+  </script>
+</body>
+</html>
