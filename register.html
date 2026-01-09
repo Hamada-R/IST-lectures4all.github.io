@@ -77,13 +77,48 @@
       flex-wrap:wrap;
     }
     .actions{display:flex;gap:10px;flex-wrap:wrap}
-    iframe{
+
+    /* form */
+    .form-wrap{padding:16px}
+    form{display:grid;gap:14px;max-width:900px}
+    label{display:block;margin-bottom:6px;color:#e5e7eb;font-weight:600}
+    .req{color:#93c5fd}
+    input[type="text"], input[type="email"], select, textarea{
       width:100%;
-      height:2027px;   /* matches your embed height */
-      border:0;
-      display:block;
-      background:transparent;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.04);
+      color:#e5e7eb;
+      outline:none;
     }
+    textarea{min-height:90px;resize:vertical}
+    input::placeholder, textarea::placeholder{color:#94a3b8}
+    .row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width: 720px){
+      .row-2{grid-template-columns:1fr}
+    }
+    .checks{display:grid;gap:8px}
+    .check{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 12px;border:1px solid rgba(255,255,255,.12);
+      border-radius:12px;background:rgba(255,255,255,.03);
+    }
+    .check input{margin-top:3px}
+    .muted{color:#cbd5e1;font-size:14px;line-height:1.6}
+    .btn{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:12px;
+      border:1px solid var(--ring);
+      cursor:pointer;
+      user-select:none;
+      font-weight:600;
+    }
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .msg{margin-top:8px;color:#cbd5e1}
+    .ok{color:#86efac}
+    .err{color:#fca5a5}
 
     footer{border-top:1px solid var(--ring);padding:30px 0 40px;color:#cbd5e1;text-align:center}
   </style>
@@ -109,27 +144,127 @@
   <main class="container">
     <h2 class="page-title">Registration</h2>
     <p class="page-sub">
-      Participation is free, but registration is required. After submitting the form, you will receive Zoom access information by email.
+      Participation is free, but registration is required. After submitting the form, your information will be stored in our registration sheet
+      and you will receive event access information by email (if enabled by the organizer).
     </p>
 
     <section class="card">
       <div class="card-head">
         <strong>Registration Form</strong>
         <div class="actions">
-          <a class="btn btn-ghost"
-             href="https://docs.google.com/forms/d/e/1FAIpQLSfR_jP_t2z8fD6p9zefmt9kDBBztFwOWmOl4hP9x80U-blDUw/viewform"
-             target="_blank" rel="noopener">
-            Open in new tab
-          </a>
+          <a class="btn btn-ghost" href="index.html">Back to Home</a>
         </div>
       </div>
 
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSfR_jP_t2z8fD6p9zefmt9kDBBztFwOWmOl4hP9x80U-blDUw/viewform?embedded=true"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-        Loading…
-      </iframe>
+      <div class="form-wrap">
+        <p class="muted" style="margin-top:0">
+          Fields marked with <span class="req">*</span> are required.
+        </p>
+
+        <form id="regForm" novalidate>
+          <!-- Honeypot (anti-spam). Must remain empty -->
+          <input type="text" name="website" autocomplete="off" tabindex="-1"
+                 style="position:absolute;left:-9999px;opacity:0;height:0;width:0" />
+
+          <div class="row-2">
+            <div>
+              <label for="full_name">Full Name <span class="req">*</span></label>
+              <input id="full_name" name="full_name" type="text" placeholder="e.g., Jane Doe" required />
+            </div>
+
+            <div>
+              <label for="email">Email Address <span class="req">*</span></label>
+              <input id="email" name="email" type="email" placeholder="name@university.edu" required />
+            </div>
+          </div>
+
+          <div class="row-2">
+            <div>
+              <label for="country">Country / Region <span class="req">*</span></label>
+              <input id="country" name="country" type="text" placeholder="e.g., Japan" required />
+            </div>
+
+            <div>
+              <label for="position">Academic Status / Position <span class="req">*</span></label>
+              <select id="position" name="position" required>
+                <option value="" selected disabled>Select…</option>
+                <option>Undergraduate Student</option>
+                <option>Master’s Student</option>
+                <option>Ph.D. Student</option>
+                <option>Postdoctoral Researcher</option>
+                <option>Faculty Member</option>
+                <option>Industry Researcher / Engineer</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="university">University / Institution Name <span class="req">*</span></label>
+            <input id="university" name="university" type="text" placeholder="e.g., The University of Osaka" required />
+          </div>
+
+          <div>
+            <label for="department">Department / School</label>
+            <input id="department" name="department" type="text" placeholder="e.g., Information Science and Technology" />
+          </div>
+
+          <div>
+            <label>Lectures of Interest</label>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="lectures_interest" value="Talk 1: Millimeter-level Wireless Localization Using UWB Wireless Networks"> <span>Talk 1: Millimeter-level Wireless Localization Using UWB Wireless Networks</span></label>
+              <label class="check"><input type="checkbox" name="lectures_interest" value="Talk 2: Engineering of Metabolic Pathways and Controlling the Flux for Efficient Bio-Production"> <span>Talk 2: Engineering of Metabolic Pathways and Controlling the Flux for Efficient Bio-Production</span></label>
+              <label class="check"><input type="checkbox" name="lectures_interest" value="Talk 3: Detection of Hardware Trojans in Integrated Circuits"> <span>Talk 3: Detection of Hardware Trojans in Integrated Circuits</span></label>
+              <label class="check"><input type="checkbox" name="lectures_interest" value="Talk 4: Distributed Algorithm Beyond Worst Case"> <span>Talk 4: Distributed Algorithm Beyond Worst Case</span></label>
+              <label class="check"><input type="checkbox" name="lectures_interest" value="Talk 5: Graph Data Analysis: From Efficiency and Accuracy to Trustworthy"> <span>Talk 5: Graph Data Analysis: From Efficiency and Accuracy to Trustworthy</span></label>
+            </div>
+            <p class="muted" style="margin-bottom:0">Optional — you can attend multiple sessions.</p>
+          </div>
+
+          <div>
+            <label for="heard_from">How did you hear about this event?</label>
+            <select id="heard_from" name="heard_from">
+              <option value="" selected disabled>Select…</option>
+              <option>University website</option>
+              <option>Email announcement</option>
+              <option>Colleague / Supervisor</option>
+              <option>Social media</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="notes">Notes / Accessibility Requirements</label>
+            <textarea id="notes" name="notes" placeholder="Optional (e.g., captions, materials in advance)"></textarea>
+          </div>
+
+          <div class="check">
+            <input id="consent" name="consent" type="checkbox" required />
+            <label for="consent" style="margin:0;font-weight:500">
+              I agree that my registration information will be used only for event organization and communication related to this webinar series.
+              <span class="req">*</span>
+            </label>
+          </div>
+
+          <div class="check">
+            <input id="recording" name="recording" type="checkbox" required />
+            <label for="recording" style="margin:0;font-weight:500">
+              I understand that sessions may be recorded for academic and educational purposes. <span class="req">*</span>
+            </label>
+          </div>
+
+          <button class="btn btn-primary" type="submit" id="submitBtn">
+            Submit Registration
+          </button>
+
+          <div id="msg" class="msg"></div>
+
+          <p class="muted" style="margin-bottom:0">
+            Google Sheet (database): <a href="https://docs.google.com/spreadsheets/d/1grULbEiJX_U7ntvpksl8dOPDfuf6jOcjgsZnFxWb3PQ/edit?usp=sharing" target="_blank" rel="noopener">Open sheet</a>
+            (admin access required to view submissions).
+          </p>
+        </form>
+      </div>
     </section>
   </main>
 
@@ -139,6 +274,84 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // IMPORTANT:
+    // 1) In the Google Sheet above, go to Extensions → Apps Script and deploy as a Web App.
+    // 2) Paste the Web App URL (ends with /exec) below.
+    const ENDPOINT = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+    function getCheckedValues(form, name) {
+      return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map(x => x.value);
+    }
+
+    function setMsg(text, kind) {
+      const el = document.getElementById("msg");
+      el.textContent = text;
+      el.className = "msg " + (kind || "");
+    }
+
+    document.getElementById("regForm").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+
+      if (!ENDPOINT || ENDPOINT.includes("PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE")) {
+        setMsg("❌ Organizer setup incomplete: Apps Script endpoint is not set yet.", "err");
+        return;
+      }
+
+      const form = ev.target;
+      const submitBtn = document.getElementById("submitBtn");
+
+      // Basic front-end validation
+      if (!form.full_name.value.trim() || !form.email.value.trim() || !form.country.value.trim() || !form.university.value.trim() || !form.position.value) {
+        setMsg("❌ Please fill all required fields.", "err");
+        return;
+      }
+      if (!form.consent.checked || !form.recording.checked) {
+        setMsg("❌ Please accept the consent and recording notices.", "err");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      setMsg("Submitting…");
+
+      const payload = {
+        full_name: form.full_name.value.trim(),
+        email: form.email.value.trim(),
+        country: form.country.value.trim(),
+        university: form.university.value.trim(),
+        department: form.department.value.trim(),
+        position: form.position.value,
+        lectures_interest: getCheckedValues(form, "lectures_interest"),
+        heard_from: form.heard_from.value || "",
+        notes: form.notes.value.trim(),
+        consent: form.consent.checked ? "yes" : "no",
+        recording: form.recording.checked ? "yes" : "no",
+        website: form.website.value || "", // honeypot
+        page_url: window.location.href,
+        user_agent: navigator.userAgent
+      };
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok || !data.ok) {
+          throw new Error(data.error || `Submit failed (${res.status})`);
+        }
+
+        setMsg("✅ Registration submitted successfully. Thank you!", "ok");
+        form.reset();
+      } catch (err) {
+        setMsg("❌ Error: " + err.message + " — please try again later.", "err");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
